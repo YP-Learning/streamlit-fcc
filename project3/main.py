@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np 
 import seaborn as sns
 import matplotlib.pyplot as plt
-import base64
 
 st.set_page_config(
     page_title="NBA Player Stats",
@@ -14,7 +13,7 @@ st.title("NBA Player Stats Explorer")
 
 st.write("""
 This app performs simple webscraping of NBA player stats data!
-* **Python libraries:** base64, pandas, streamlit
+* **Python libraries:** pandas, streamlit
 * **Data source:** [Baskedball-refrence.com](https://www.basketball-refrence.com/).
 """)
 
