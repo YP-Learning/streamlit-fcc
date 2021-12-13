@@ -8,6 +8,7 @@ st.set_page_config(
     page_title="S&P 500 App",
     page_icon=":chart_with_upwards_trend:"
 )
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.title("S&P 500 App")
 
@@ -46,18 +47,21 @@ def download_yf():
     )
 
 # Plot Closing Price of Query Symbol
-@st.cache
 def price_plot(data, symbol):
     df = pd.DataFrame(data[symbol].Close)
     df['Date'] = df.index
-    fig = plt.figure()
+    # print(df)
+
     plt.fill_between(df.Date, df.Close, color='skyblue', alpha=0.3)
     plt.plot(df.Date, df.Close, color='skyblue', alpha=0.8)
+
+    # print("set")
     plt.xticks(rotation=90)
     plt.title(symbol, fontweight='bold')
     plt.xlabel('Date', fontweight='bold')
     plt.ylabel('Closing Price', fontweight='bold')
-    return fig
+
+    return st.pyplot()
 
 df = load_data()
 sector = df.groupby('GICS Sector')
@@ -89,4 +93,4 @@ if col2.button("View Plots"):
 
     st.header('Stock Closing Price')
     for i in list(df_selected_sector.Symbol)[:n_companies]:
-        st.pyplot(price_plot(data, i)) 
+        price_plot(data, i) 
