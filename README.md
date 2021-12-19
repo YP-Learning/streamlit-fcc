@@ -11,6 +11,6 @@ Projects: -
 - [7. Classification Iris](./project7/)
 - [8. Classification Penguins](./project8/)
 - [9. Regression Boston Housing](./project9/)
-<!-- 10. Regression Bioinformatics Solubility -->
+- [10. Regression Bioinformatics Solubility](./project10/)
 <!-- 11. Deploy to Heroku -->
 <!-- 12. Deploy to Streamlit Sharing -->
