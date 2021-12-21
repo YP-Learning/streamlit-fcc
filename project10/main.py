@@ -48,36 +48,39 @@ def generate(smiles, verbose=False):
 
     return descriptors
 
+def main():
+    logo = Image.open('solubility-logo.jpg')
+    st.image(logo, use_column_width=True)
 
-logo = Image.open('solubility-logo.jpg')
-st.image(logo, use_column_width=True)
+    st.write("""
+    # Molecular Solubility Prediction Web App
+    This app predicts the **Solubility (LogS)** values of molecules!
+    Data obtained from the John S. Delaney. [ESOL:  Estimating Aqueous Solubility Directly from Molecular Structure](https://pubs.acs.org/doi/10.1021/ci034243x). ***J. Chem. Inf. Comput. Sci.*** 2004, 44, 3, 1000-1005.
+    ***
+    """)
 
-st.write("""
-# Molecular Solubility Prediction Web App
-This app predicts the **Solubility (LogS)** values of molecules!
-Data obtained from the John S. Delaney. [ESOL:  Estimating Aqueous Solubility Directly from Molecular Structure](https://pubs.acs.org/doi/10.1021/ci034243x). ***J. Chem. Inf. Comput. Sci.*** 2004, 44, 3, 1000-1005.
-***
-""")
+    st.header('User Input Features')
 
-st.header('User Input Features')
+    # sample SMILES input
+    SMILES_input = "NCCCC\nCCC\nCN"
 
-# sample SMILES input
-SMILES_input = "NCCCC\nCCC\nCN"
+    SMILES = st.text_area("SMILES input", SMILES_input)
+    SMILES = "C\n" + SMILES 
+    SMILES = SMILES.split('\n')
 
-SMILES = st.text_area("SMILES input", SMILES_input)
-SMILES = "C\n" + SMILES 
-SMILES = SMILES.split('\n')
+    st.header('Input SMILES')
+    SMILES[1:] # Skips the dummy first item
 
-st.header('Input SMILES')
-SMILES[1:] # Skips the dummy first item
+    # Calculate molecular descriptors
+    st.header('Computed molecular descriptors')
+    X = generate(SMILES)
+    X[1:] # Skips the dummy first item
 
-# Calculate molecular descriptors
-st.header('Computed molecular descriptors')
-X = generate(SMILES)
-X[1:] # Skips the dummy first item
+    model = load_model()
+    prediction = model.predict(X)
 
-model = load_model()
-prediction = model.predict(X)
+    st.header('Predicted LogS values')
+    prediction[1:]  # print all except dummy
 
-st.header('Predicted LogS values')
-prediction[1:]  # print all except dummy
+if __name__ == "__main__":
+    main()
