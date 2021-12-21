@@ -1,6 +1,8 @@
 # 12 Data Science Projects
 an fcc course, my code while doing it is stored in here
 
+original repo -> https://github.com/dataprofessor/streamlit_freecodecamp
+
 Projects: -
 - [1. Simple Stock Price](./project1/)
 - [2. Simple Bioinformatics DNA Count](./project2/)
